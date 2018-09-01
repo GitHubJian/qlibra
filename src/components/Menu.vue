@@ -43,7 +43,6 @@ export default {
 [class^='icon-'],
 [class*=' icon-'] {
     font-family: icomoon !important;
-    speak: none;
     font-style: normal;
     font-weight: 400;
     font-variant: normal;
