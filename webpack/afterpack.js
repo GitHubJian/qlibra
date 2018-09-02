@@ -15,7 +15,6 @@ const { writeFileSync } = require('fs');
 const { entry } = require('./entry');
 
 const afterpack = async () => {
-    console.log('111');
     Object.entries(entry).forEach(async ([k, v]) => {
         const content = temp.replace('#script#', k);
         const filePath = path.resolve(dist, `${k}.html`);
