@@ -1,14 +1,35 @@
 <template>
     <div class="sa-sidebar">
         <section class="sidebar-section">
-            <h4>
+            <h4 class="share-hd">
                 <span class="action-onoff">
                     <span class="icon-expand-down"></span>
                 </span>
                 <span class="icon-dashboard"></span>
-                <span>数据概览111</span>
+                <span>数据概览</span>
                 <span class="icon-add" data-method="showMenu" data-authorization="analyst"></span>
             </h4>
+            <div class="share-bd">
+                <div class="groups">
+                    <div class="groups-share">
+                        <h5>
+                            <span class="icon-share"></span>
+                            <span class="title">分享给我的概览</span>
+                            <span class="action-toggle">
+                                <span class="icon-collaps-up"></span>
+                            </span>
+                        </h5>
+                        <ul class="groups-menus">
+                            <li class="active">
+                                <a>
+                                    <span class="icon-share"></span>
+                                    <span>老板看板</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </section>
         <section class="sidebar-section">
             <h4>
@@ -124,6 +145,117 @@ export default {
             .icon-dashboard {
                 &::before {
                     content: '\e909';
+                }
+            }
+        }
+
+        .share-bd {
+            .groups {
+                background-color: #2e3743;
+
+                .groups-share {
+                    position: relative;
+
+                    & > h5 {
+                        position: relative;
+                        height: 38px;
+                        margin: 0;
+                        padding: 0 16px;
+                        color: #707f96;
+                        font-size: 13px;
+                        line-height: 23px;
+                        cursor: pointer;
+
+                        span {
+                            line-height: 38px;
+                        }
+
+                        span[class^='icon-'] {
+                            color: #99a9bf;
+                        }
+
+                        .icon-share {
+                            float: left;
+                            max-width: 165px;
+                            margin-right: 3px;
+                            font-size: 20px;
+                            line-height: 36px;
+                            cursor: move;
+                        }
+
+                        .title {
+                            float: left;
+                            overflow: hidden;
+                            white-space: nowrap;
+                            text-overflow: ellipsis;
+                            font-weight: 400;
+                            max-width: 65%;
+                        }
+
+                        .action-toggle {
+                            position: absolute;
+                            top: 0;
+                            left: 29px;
+                            right: 0;
+                            bottom: 0;
+                            cursor: pointer;
+                            user-select: none;
+                        }
+
+                        .icon-collaps-up {
+                        }
+                    }
+
+                    .groups-menus {
+                        margin-top: 3px;
+                        margin-bottom: 0;
+                        padding: 1px 0;
+                        padding-bottom: 6px;
+                        min-height: 6px;
+
+                        li {
+                            height: 32px;
+                            transition: background 0.2s ease-in-out;
+
+                            &.active {
+                                background: #2dca93;
+                            }
+
+                            a {
+                                display: block;
+                                overflow: hidden;
+                                padding-left: 37px;
+                                font-size: 14px;
+                                color: #d7dee6;
+                                line-height: 32px;
+                                outline: 0;
+
+                                [class^='icon-'] {
+                                    float: left;
+                                    width: 24px;
+                                    line-height: 42px;
+                                    cursor: move;
+                                    color: #99a9bf;
+                                }
+
+                                span {
+                                    color: #fff;
+                                    font-weight: 400;
+                                    line-height: 32px;
+                                }
+
+                                .title {
+                                    float: left;
+                                    max-width: 160px;
+                                    font-size: 12px;
+                                    white-space: nowrap;
+                                    text-overflow: ellipsis;
+                                    overflow: hidden;
+                                    color: #c0ccda;
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }

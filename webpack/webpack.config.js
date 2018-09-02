@@ -3,6 +3,9 @@ const { basename, resolve } = require('path');
 const glob = require('glob');
 const { statSync } = require('fs');
 const outputPath = resolve(rootPath, 'dist');
+const { entry } = require('./entry');
+
+
 const alias = glob
     .sync(resolve(rootPath, './src/*'))
     .filter(v => {
@@ -13,18 +16,11 @@ const alias = glob
         return prev;
     }, {});
 
-console.log('-'.repeat(30));
-console.log(alias);
-console.log('-'.repeat(30));
-
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 module.exports = {
     mode: 'development',
-    entry: {
-        index: './src/main.js',
-        vendors: ['vue']
-    },
+    entry: Object.assign({}, entry, { vendors: ['vue'] }),
     output: {
         filename: '[name].js',
         path: outputPath,

@@ -3,6 +3,8 @@ const webpackConfig = require('./webpack.config.js');
 const cb = function() {
     console.log('done');
 };
+const prepack = require('./prepack');
+const afterpack = require('./afterpack');
 
 const webpackCompiler = (config, callback = cb) => {
     return new Promise((res, rej) => {
@@ -24,4 +26,8 @@ const webpackBuild = async () => {
     await webpackCompiler(webpackConfig);
 };
 
-webpackBuild();
+(async () => {
+    await prepack();
+    await webpackBuild();
+    await afterpack();
+})();
