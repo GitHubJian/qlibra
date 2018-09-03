@@ -1,8 +1,8 @@
 const webpackCompiler = require('./compiler');
+const { webpackConfig } = require('./webpack.dll.config');
 
 const dllBuild = async () => {
-    const webpackDllConfig = require('./webpack.dll.config');
-    await webpackCompiler(webpackDllConfig);
+    await webpackCompiler(webpackConfig);
 };
 
 dllBuild();

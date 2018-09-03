@@ -9,6 +9,7 @@ const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin');
 const LIBRARY_NAME = '__[name]_[chunkhash]';
 
 const entry = { vendor: ['vue', 'bootstrap'] };
+
 Object.entries(entry).forEach(([k, v]) => {
     if (v.includes('bootstrap')) {
         v.splice(
@@ -85,4 +86,4 @@ const webpackConfig = {
     }
 };
 
-module.exports = webpackConfig;
+module.exports = { entry, webpackConfig };
