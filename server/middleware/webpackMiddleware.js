@@ -12,8 +12,14 @@ const webpackConfig = require(path.resolve(
 
 const { deepClone } = require('./../utils');
 const logger = require('./../utils/logger');
-
 const projectEntry = deepClone(webpackConfig.entry);
+
+webpackConfig.entry = {
+    global: [
+        'webpack-hot-middleware/client',
+        path.resolve(rootPath, 'src/global.js')
+    ]
+};
 
 const getSingleHtmlPlugin = function(entryKey, entryValue) {
     const options = new HtmlWebpackPlugin({
@@ -21,8 +27,8 @@ const getSingleHtmlPlugin = function(entryKey, entryValue) {
         title: '测试',
         template: path.resolve(rootPath, 'template/index.html'),
         favicon: path.resolve(rootPath, 'dist/favicon.ico'),
-        chunks: [entryValue],
-        scripts: `${entryKey}.js`,
+        chunks: ['global', entryValue],
+        scripts: ['global.js', `${entryKey}.js`],
         inject: 'body'
     });
     return options;

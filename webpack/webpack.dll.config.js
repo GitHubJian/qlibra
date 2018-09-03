@@ -1,24 +1,14 @@
 const pathConfig = require('./../path.config');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const extractCSS = new ExtractTextPlugin(`static/css/[name].[chunkhash].css`);
+const extractCSS = new ExtractTextPlugin(`css/[name].css`);
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const AssetsWebpackPlugin = require('assets-webpack-plugin');
 const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin');
 
 const LIBRARY_NAME = '__[name]_[chunkhash]';
 
-const entry = { vendor: ['vue', 'bootstrap'] };
-
-Object.entries(entry).forEach(([k, v]) => {
-    if (v.includes('bootstrap')) {
-        v.splice(
-            v.indexOf('bootstrap'),
-            1,
-            'bootstrap/dist/css/bootstrap.min.css'
-        );
-    }
-});
+const entry = { vendor: ['vue', 'bootstrap/dist/css/bootstrap.min.css'] };
 
 const webpackConfig = {
     entry,
@@ -37,14 +27,20 @@ const webpackConfig = {
     },
     module: {
         rules: [
+            // {
+            //     test: /\.css$/,
+            //     use: [
+            //         {
+            //             loader: 'css-loader',
+            //             options: { minimize: true }
+            //         }
+            //     ]
+            // },
             {
                 test: /\.css$/,
-                use: [
-                    {
-                        loader: 'css-loader',
-                        options: { minimize: true }
-                    }
-                ]
+                use: extractCSS.extract({
+                    use: ['css-loader']
+                })
             },
             {
                 test: /\.(png|jpe?g|gif|svg|woff2?|eot|ttf|otf)(\?.*)?$/,
@@ -67,7 +63,7 @@ const webpackConfig = {
             root: pathConfig.root,
             verbose: false
         }),
-        //extractCSS,
+        extractCSS,
         new webpack.DllPlugin({
             path: `${pathConfig.dll}/[name].json`,
             name: LIBRARY_NAME

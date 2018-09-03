@@ -76,7 +76,6 @@
 </template>
 
 <script>
-import './../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import Menu from './Menu';
 import MenuBtm from './MenuBtm';
 
