@@ -12,12 +12,23 @@
     "css": "/css/test.css"
   },
   "": {
+    "css": [
+      "/../static/css/overview.css",
+      "/../static/css/test.css",
+      "/../static/css/index.css",
+      "/../static/css/vendor.css"
+    ],
     "ico": [
       "/../static/favicon.ico",
       "/favicon.ico"
     ],
-    "js": "/../static/js/vendor.js",
-    "css": "/../static/css/vendor.css",
+    "json": "/../static/js/index.json",
+    "js": [
+      "/../static/js/vendor.js",
+      "/../static/js/test.js",
+      "/../static/js/overview.js",
+      "/../static/js/index.js"
+    ],
     "html": [
       "/../static/index.html",
       "/../static/overview.html",

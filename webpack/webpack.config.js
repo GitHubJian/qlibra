@@ -19,6 +19,7 @@ const AssetsWebpackPlugin = require('assets-webpack-plugin');
 const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin');
 const HtmlWebpackIncludeAssetsPlugin = require('html-webpack-include-assets-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const { entry: dllEntry } = require('./webpack.dll.config');
 
 const { NODE_ENV } = process.env;
 
@@ -145,18 +146,13 @@ const webpackConfig = {
                 from: pathConfig.favicon,
                 to: pathConfig.static
             }
-        ])
-        // new HtmlWebpackIncludeAssetsPlugin({
-        //     append: false,
-        //     assets: Object.entries(require(`${pathConfig.dll}/index.json`))
-        //         .map(([k, v]) => {
-        //             return Object.values(v);
-        //         })
-        //         .reduce((prev, cur) => {
-        //             prev.push(...cur);
-        //             return prev;
-        //         }, [])
-        // })
+        ]),
+        ...Object.keys(dllEntry).map(
+            v =>
+                new webpack.DllReferencePlugin({
+                    manifest: require(`${pathConfig.dll}/${v}.json`)
+                })
+        )
     ]
 };
 
@@ -184,7 +180,18 @@ webpackConfig.plugins.push(
             filename: 'index.json',
             prettyPrint: true
         }),
-        ...HtmlWebpackPluginList
+        ...HtmlWebpackPluginList,
+        new HtmlWebpackIncludeAssetsPlugin({
+            append: false,
+            assets: Object.entries(require(`${pathConfig.dll}/index.json`))
+                .map(([k, v]) => {
+                    return Object.values(v);
+                })
+                .reduce((prev, cur) => {
+                    prev.push(...cur);
+                    return prev;
+                }, [])
+        })
     ]
 );
 
