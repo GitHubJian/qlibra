@@ -2,7 +2,7 @@ const rootPath = process.cwd();
 const { basename, resolve } = require('path');
 const glob = require('glob');
 const { statSync } = require('fs');
-const outputPath = resolve(rootPath, 'dist');
+const pathConfig = require('./../path.config');
 const { entry } = require('./entry');
 
 const alias = glob
@@ -22,7 +22,7 @@ module.exports = {
     entry: entry,
     output: {
         filename: '[name].js',
-        path: outputPath,
+        path: resolve(pathConfig.dist, 'js'),
         publicPath: '/'
     },
     resolve: {
