@@ -9,7 +9,8 @@
         "start": " NODE_ENV=development node index.js",
         "debug": "node --inspect-brk index.js",
         "pm2": "pm2 start ./index.js --watch && pm2 logs index",
-        "webpack": "node ./webpack",
+        "build": "node ./webpack/build",
+        "dll": "node ./webpack/dllBuild",
         "webpack-cli": "node_modules/.bin/webpack --config ./webpack/webpack.config.js"
     },
     "keywords": [],
