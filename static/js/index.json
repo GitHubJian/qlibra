@@ -1,0 +1,27 @@
+{
+  "index": {
+    "js": "/js/index.js",
+    "css": "/css/index.css"
+  },
+  "overview": {
+    "js": "/js/overview.js",
+    "css": "/css/overview.css"
+  },
+  "test": {
+    "js": "/js/test.js",
+    "css": "/css/test.css"
+  },
+  "": {
+    "ico": [
+      "/../static/favicon.ico",
+      "/favicon.ico"
+    ],
+    "js": "/../static/js/vendor.js",
+    "css": "/../static/css/vendor.css",
+    "html": [
+      "/../static/index.html",
+      "/../static/overview.html",
+      "/../static/test.html"
+    ]
+  }
+}

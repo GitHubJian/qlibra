@@ -4,12 +4,8 @@ const rootPath = process.cwd();
 
 module.exports = () => {
     return async (ctx, next) => {
-        console.log('-'.repeat(30));
-        console.log(ctx.path);
-        console.log('-'.repeat(30));
-
         await send(ctx, ctx.path === '/' ? 'index.html' : ctx.path, {
-            root: path.resolve(rootPath, 'dist'),
+            root: path.resolve(rootPath, 'static'),
             setHeaders: (res, path, stats) => {
                 res.setHeader('Author', 'ws.xiao');
                 if (path.endsWith('.json')) {

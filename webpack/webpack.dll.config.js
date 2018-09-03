@@ -27,15 +27,6 @@ const webpackConfig = {
     },
     module: {
         rules: [
-            // {
-            //     test: /\.css$/,
-            //     use: [
-            //         {
-            //             loader: 'css-loader',
-            //             options: { minimize: true }
-            //         }
-            //     ]
-            // },
             {
                 test: /\.css$/,
                 use: extractCSS.extract({

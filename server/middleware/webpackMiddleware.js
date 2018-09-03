@@ -5,7 +5,7 @@ const singleEntryPlugin = require('webpack/lib/SingleEntryPlugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { hotMiddleware } = require('koa-webpack-middleware');
 const webpackDevMiddleware = require('webpack-dev-middleware');
-const webpackConfig = require(path.resolve(
+const { webpackConfig } = require(path.resolve(
     rootPath,
     'webpack/webpack.config.js'
 ));

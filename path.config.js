@@ -1,12 +1,21 @@
 const root = process.cwd();
 const { resolve } = require('path');
 
-module.exports = {
-    root,
-    temp: resolve(root, '.temp'),
-    static: resolve(root, '.temp/static'),
-    dist: resolve(root, 'dist'),
-    dll: resolve(root, 'dist/dll'),
-    src: resolve(root, 'src'),
-    nodeModule: resolve(root, 'node_modules')
+const entry = {
+    temp: '.temp',
+    prepackPath: '.temp/prepack',
+    dist: 'dist',
+    dll: 'dist/dll',
+    src: 'src',
+    static: 'static',
+    nodeModule: 'node_modules',
+    favicon: './favicon.ico'
 };
+
+const paths = Object.entries(entry).reduce((prev, [k, v]) => {
+    prev[k] = resolve(root, v);
+
+    return prev;
+}, {});
+
+module.exports = paths;

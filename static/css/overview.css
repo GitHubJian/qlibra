@@ -1,0 +1,451 @@
+
+.q-sidebar-menu .q-sidebar-section > h4 {
+  position: relative;
+  color: #8492a6;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 48px;
+  padding: 0 12px 0 15px;
+  margin: 0;
+  user-select: none;
+  cursor: pointer;
+}
+.q-sidebar-menu .q-sidebar-section > h4 .action-onoff {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+.q-sidebar-menu .q-sidebar-section > h4 .action-onoff .icon-expand-down,
+    .q-sidebar-menu .q-sidebar-section > h4 .action-onoff .icon-expand-up {
+      float: right;
+      margin-right: 12px;
+}
+.q-sidebar-menu .q-sidebar-section > h4 .action-onoff .icon-expand-down::before,
+      .q-sidebar-menu .q-sidebar-section > h4 .action-onoff .icon-expand-up::before {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+}
+.q-sidebar-menu .q-sidebar-section > h4 .action-onoff .icon-expand-down::before {
+      background-color: #2e3642;
+      color: #6c7a8e;
+      border-radius: 3px;
+      content: '\E92B';
+}
+.q-sidebar-menu .q-sidebar-section > h4 .action-onoff .icon-expand-up::before {
+      background-color: #2e3642;
+      color: #6c7a8e;
+      border-radius: 3px;
+      content: '\E914';
+}
+.q-sidebar-menu .q-sidebar-section > h4 span[class^='icon-'] {
+    line-height: 48px;
+    vertical-align: sub;
+    display: inline-block;
+    color: #99a9bf;
+}
+.q-sidebar-menu .q-sidebar-section > h4 .icon-add {
+    position: relative;
+    z-index: 2;
+    float: right;
+    font-size: 16px;
+    line-height: 48px;
+    right: 34px;
+}
+.q-sidebar-menu .q-sidebar-section > h4 .icon-add::before {
+      content: '\E901';
+}
+.q-sidebar-menu .q-sidebar-section > h4 .icon-dashboard::before {
+    content: '\E909';
+}
+.q-sidebar-menu .q-sidebar-section .share-bd .groups {
+  background-color: #2e3743;
+}
+.q-sidebar-menu .q-sidebar-section .share-bd .groups .groups-share {
+    position: relative;
+}
+.q-sidebar-menu .q-sidebar-section .share-bd .groups .groups-share > h5 {
+      position: relative;
+      height: 38px;
+      margin: 0;
+      padding: 0 16px;
+      color: #707f96;
+      font-size: 13px;
+      line-height: 23px;
+      cursor: pointer;
+}
+.q-sidebar-menu .q-sidebar-section .share-bd .groups .groups-share > h5 span {
+        line-height: 38px;
+}
+.q-sidebar-menu .q-sidebar-section .share-bd .groups .groups-share > h5 span[class^='icon-'] {
+        color: #99a9bf;
+}
+.q-sidebar-menu .q-sidebar-section .share-bd .groups .groups-share > h5 .icon-share {
+        float: left;
+        max-width: 165px;
+        margin-right: 3px;
+        font-size: 20px;
+        line-height: 36px;
+        cursor: move;
+}
+.q-sidebar-menu .q-sidebar-section .share-bd .groups .groups-share > h5 .title {
+        float: left;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        font-weight: 400;
+        max-width: 65%;
+}
+.q-sidebar-menu .q-sidebar-section .share-bd .groups .groups-share > h5 .action-toggle {
+        position: absolute;
+        top: 0;
+        left: 29px;
+        right: 0;
+        bottom: 0;
+        cursor: pointer;
+        user-select: none;
+}
+.q-sidebar-menu .q-sidebar-section .share-bd .groups .groups-share .groups-menus {
+      margin-top: 3px;
+      margin-bottom: 0;
+      padding: 1px 0;
+      padding-bottom: 6px;
+      min-height: 6px;
+}
+.q-sidebar-menu .q-sidebar-section .share-bd .groups .groups-share .groups-menus li {
+        height: 32px;
+        transition: background 0.2s ease-in-out;
+}
+.q-sidebar-menu .q-sidebar-section .share-bd .groups .groups-share .groups-menus li.active {
+          background: #2dca93;
+}
+.q-sidebar-menu .q-sidebar-section .share-bd .groups .groups-share .groups-menus li a {
+          display: block;
+          overflow: hidden;
+          padding-left: 37px;
+          font-size: 14px;
+          color: #d7dee6;
+          line-height: 32px;
+          outline: 0;
+}
+.q-sidebar-menu .q-sidebar-section .share-bd .groups .groups-share .groups-menus li a [class^='icon-'] {
+            float: left;
+            width: 24px;
+            line-height: 42px;
+            cursor: move;
+            color: #99a9bf;
+}
+.q-sidebar-menu .q-sidebar-section .share-bd .groups .groups-share .groups-menus li a span {
+            color: #fff;
+            font-weight: 400;
+            line-height: 32px;
+}
+.q-sidebar-menu .q-sidebar-section .share-bd .groups .groups-share .groups-menus li a .title {
+            float: left;
+            max-width: 160px;
+            font-size: 12px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            color: #c0ccda;
+}
+.q-sidebar-menu .q-sidebar-section .sidebar-links {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 0;
+}
+.q-sidebar-menu .q-sidebar-section .sidebar-links li {
+    box-sizing: content-box;
+    height: 38px;
+    line-height: 38px;
+    padding: 0;
+    transition: background 0.2s ease-in-out;
+    position: relative;
+    background-color: #2e3743;
+}
+.q-sidebar-menu .q-sidebar-section .sidebar-links li a {
+      color: #c0ccda;
+      font-size: 13px;
+      width: 100%;
+      height: 38px;
+      line-height: 38px;
+      display: inline-block;
+      position: relative;
+      outline: 0;
+}
+.q-sidebar-menu .q-sidebar-section .sidebar-links li a span {
+        display: inline-block;
+        width: 24px;
+        vertical-align: middle;
+        line-height: 38px;
+}
+.q-sidebar-menu .q-sidebar-section .sidebar-links li a span.sidebar-link-title {
+          width: 100%;
+          padding-left: 40px;
+          padding-right: 10px;
+          vertical-align: sub;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+}
+.q-sidebar-menu .q-sidebar-section .sidebar-links li.active {
+      background: #2dca93;
+      color: #fff;
+      font-weight: 400;
+}
+.q-sidebar-menu .q-sidebar-section .sidebar-links li.active a {
+        color: #fff;
+}
+.q-sidebar-menu .q-sidebar-section .sidebar-links > li:nth-of-type(1) {
+    border-radius: 3px 3px 0 0;
+    border-top: 6px solid #2e3743;
+}
+
+.q-sidebar-bottom-panel {
+  width: 100%;
+}
+.q-sidebar-bottom-panel a {
+    position: relative;
+    display: inline-block;
+    width: 33.3%;
+    height: 100%;
+    color: #c0ccda;
+    line-height: 50px;
+    text-align: center;
+    background: #35404f;
+    transition: all 0.2s ease-in-out;
+    border-right: 1px solid #2e3743;
+}
+
+.q-page {
+  width: 100%;
+  height: 100vh;
+  padding-top: 55px;
+  align-items: stretch;
+  min-width: 799px;
+}
+.q-navbar {
+  position: fixed;
+  right: 0px;
+  top: 0px;
+  z-index: 1030;
+  width: calc(100% - 240px);
+  height: 55px;
+  min-height: 50px;
+  line-height: 55px;
+  background: #fff;
+  border: 0;
+  color: #475669;
+  box-shadow: 0 1px 1px 0 rgba(166, 166, 166, 0.2);
+  transition: margin-left 0.2s ease;
+}
+.q-navbar.active {
+    width: calc(100% - 63px);
+    margin-left: 63px;
+    transition: all 0.2s ease;
+}
+.q-navbar .q-sidebar-pack {
+    position: relative;
+    margin-left: -4px;
+    display: inline-block;
+    width: 54px;
+    vertical-align: top;
+}
+.q-navbar .q-sidebar-pack a {
+      display: block;
+      width: 100%;
+      height: 55px;
+      color: #475669;
+      font-weight: 300;
+}
+.q-navbar #sa_head_project {
+    position: relative;
+    margin-left: -2px;
+    display: inline-block;
+    vertical-align: top;
+    transition: all 0.2s ease;
+}
+.q-navbar #sa_head_project span {
+      padding: 5px 0 5px 18px;
+}
+.q-navbar .sa-head-r {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+}
+.q-navbar .sa-head-r > li {
+      display: inline-block;
+      height: 100%;
+      vertical-align: top;
+}
+.q-navbar .sa-head-r > li > a {
+        position: relative;
+        display: inline-block;
+        padding: 0 20px;
+        max-width: 240px;
+        height: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        vertical-align: super;
+}
+.q-navbar #user-dropdown {
+    left: auto;
+    right: 0;
+}
+.q-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1020;
+  width: 240px;
+  height: 100%;
+  background: #35404f;
+  transition: width 0.2s, left 0.2s;
+  box-shadow: 2px 0 10px 0 rgba(166, 166, 166, 0.5);
+}
+.q-sidebar .q-sidebar-top .q-logo {
+    display: block;
+    width: 130px;
+    height: 55px;
+    background: 10px center no-repeat;
+    background-size: 110px auto;
+    display: inline-block;
+    transform: scale(0.85);
+    transition: transform 0.3s;
+}
+.q-sidebar .q-sidebar-main {
+    height: calc(100% - 60px);
+    overflow-y: auto;
+}
+.q-sidebar .q-sidebar-bottom {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    width: 100%;
+    height: 50px;
+    background: #35404f;
+    overflow-x: hidden;
+    border-left: 1px solid #35404f;
+    border-top: 1px solid #2e3743;
+    transition: all 0.15s linear;
+}
+.main {
+  width: 100%;
+  height: 100%;
+  padding-left: 240px;
+  transition: padding-left 0.2s ease;
+}
+.main .bookmark-tool-bar {
+    position: fixed;
+    top: 55px;
+    z-index: 99;
+    width: calc(100% - 240px);
+}
+.main .sa-report {
+    padding-top: 56px;
+    width: 100%;
+    min-height: 100%;
+}
+
+.widget-container {
+  float: left;
+  padding-left: 10px;
+  padding-right: 10px;
+  width: 25%;
+}
+.widget-container .widget-content-container {
+    padding: 14px 20px;
+    height: 100%;
+    border: 2px #fff solid;
+    background: #fff;
+    box-shadow: 0 2px 11px 0 rgba(190, 202, 218, 0.17);
+    border-radius: 3px;
+}
+.widget-container .widget-content-container:hover {
+      border: 2px solid #3ad1c5;
+}
+.widget-container .widget-content-container .widget-topbar .widget-title {
+      display: inline-block;
+      max-width: calc(100% - 20px);
+}
+.widget-container .widget-content-container .widget-topbar .widget-title .title {
+        color: #5f6e82;
+        white-space: nowrap;
+        overflow: hidden;
+        font-weight: 400;
+        font-size: 14px;
+        text-overflow: ellipsis;
+}
+.widget-container .widget-content-container .widget-topbar .widget-title .title a {
+          display: inline-block;
+          min-width: 10px;
+          min-height: 20px;
+          color: #5f6e82;
+}
+.widget-container .widget-content-container .widget-topbar .widget-title .range {
+        font-size: 12px;
+        color: #8492a6;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+}
+.widget-container .widget-content-container .widget-chart-container .dashboard-number-container {
+      position: relative;
+      margin-top: 8px;
+      color: #8492a6;
+      font-size: 13px;
+      font-family: Roboto, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-weight: 400;
+}
+.widget-container .widget-content-container .widget-chart-container .dashboard-number-container .inner {
+        width: 100%;
+}
+.widget-container .widget-content-container .widget-chart-container .dashboard-number-container .inner .number-content {
+          width: 100%;
+          margin-top: -3px;
+}
+.widget-container .widget-content-container .widget-chart-container .dashboard-number-container .inner .number-content::after {
+            content: '.';
+            display: block;
+            height: 0;
+            clear: both;
+            visibility: hidden;
+}
+.widget-container .widget-content-container .widget-chart-container .dashboard-number-container .inner .number-content .number {
+            display: inline-block;
+            font-size: 40px;
+            max-width: calc(100% - 30px);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+}
+.widget-container .widget-content-container .widget-chart-container .dashboard-number-container .inner .number-content .numberUnit {
+            margin-top: 30px;
+            font-size: 12px;
+}
+.widget-container .widget-content-container .widget-chart-container .dashboard-number-container .inner .number-content .mom-yoy-content {
+            display: inline-block;
+            margin: -5px 0 0;
+            width: 100%;
+}
+.widget-container .widget-content-container .widget-chart-container .dashboard-number-container .inner .number-content .mom-yoy-content > div {
+              display: inline-block;
+}
+.widget-container .widget-content-container .widget-chart-container .dashboard-number-container .inner .number-content .mom-yoy-content .mom-content {
+              display: inline-block;
+}
+.widget-container .widget-content-container .widget-chart-container .dashboard-number-container .inner .number-content .mom-yoy-content .measuresUnit {
+              margin-top: 30px;
+              font-size: 12px;
+}
+.widget-container .widget-content-container .widget-chart-container .dashboard-number-container .inner .number-content .mom-yoy-content .kpi-drop {
+              position: relative;
+              padding-left: 8px;
+              color: #fc6772;
+              font-size: 12px;
+}
