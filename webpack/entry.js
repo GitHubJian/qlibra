@@ -1,7 +1,7 @@
-const projectConfig = require('./../project.config');
+const pathConfig = require('./../path.config');
 const glob = require('glob');
 const path = require('path');
-const { src, static: staticPath } = projectConfig;
+const { src, static: staticPath } = pathConfig;
 
 const entry = glob
     .sync(path.resolve(src, './pages/**/index.vue'))
@@ -12,6 +12,5 @@ const entry = glob
         prev[entryKey] = entryValue;
         return prev;
     }, {});
-
 
 module.exports = { entry };

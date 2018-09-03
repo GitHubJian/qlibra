@@ -1,13 +1,13 @@
 <template>
-    <div class="sa-sidebar">
-        <section class="sidebar-section">
+    <div class="q-sidebar-menu">
+        <section class="q-sidebar-section">
             <h4 class="share-hd">
-                <span class="action-onoff">
-                    <span class="icon-expand-down"></span>
-                </span>
                 <span class="icon-dashboard"></span>
                 <span>数据概览</span>
                 <span class="icon-add" data-method="showMenu" data-authorization="analyst"></span>
+                <span class="action-onoff">
+                    <span class="icon-expand-down"></span>
+                </span>
             </h4>
             <div class="share-bd">
                 <div class="groups">
@@ -61,20 +61,8 @@ export default {
 </script>
 
 <style lang="scss">
-[class^='icon-'],
-[class*=' icon-'] {
-    font-family: icomoon !important;
-    font-style: normal;
-    font-weight: 400;
-    font-variant: normal;
-    text-transform: none;
-    line-height: 1;
-    font-size: 20px;
-    -webkit-font-smoothing: antialiased;
-}
-
-.sa-sidebar {
-    .sidebar-section {
+.q-sidebar-menu {
+    .q-sidebar-section {
         & > h4 {
             position: relative;
             color: #8492a6;

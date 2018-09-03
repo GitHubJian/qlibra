@@ -5,7 +5,6 @@ const { statSync } = require('fs');
 const outputPath = resolve(rootPath, 'dist');
 const { entry } = require('./entry');
 
-
 const alias = glob
     .sync(resolve(rootPath, './src/*'))
     .filter(v => {
@@ -20,7 +19,7 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 module.exports = {
     mode: 'development',
-    entry: Object.assign({}, entry, { vendors: ['vue'] }),
+    entry: entry,
     output: {
         filename: '[name].js',
         path: outputPath,

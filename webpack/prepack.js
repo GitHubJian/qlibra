@@ -1,7 +1,7 @@
-const projectConfig = require('./../project.config');
+const pathConfig = require('./../path.config');
 const glob = require('glob');
 const path = require('path');
-const { src, static: staticPath } = projectConfig;
+const { src, static: staticPath } = pathConfig;
 const fs = require('fs-extra');
 const { writeFileSync } = require('fs');
 

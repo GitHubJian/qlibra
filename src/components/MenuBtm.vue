@@ -1,10 +1,10 @@
 <template>
-    <div class="sidebar-bottom-panel">
-        <a class="">
+    <div class="q-sidebar-bottom-panel">
+        <a>
             <span class="icon-metadata"></span>
             <span>元数据</span>
         </a>
-        <a class="">
+        <a>
             <span class="icon-metadata"></span>
             <span>元数据</span>
         </a>
@@ -20,24 +20,20 @@ export default {
 </script>
 
 <style lang="scss">
-.sidebar-bottom-panel {
+.q-sidebar-bottom-panel {
     width: 100%;
 
     a {
-        color: #c0ccda;
+        position: relative;
+        display: inline-block;
         width: 33.3%;
         height: 100%;
+        color: #c0ccda;
         line-height: 50px;
-        display: inline-block;
         text-align: center;
         background: #35404f;
-        position: relative;
         transition: all 0.2s ease-in-out;
         border-right: 1px solid #2e3743;
-
-        span {
-            font-size: 14px;
-        }
     }
 }
 </style>

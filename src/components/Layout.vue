@@ -1,9 +1,22 @@
 <template>
-    <div class="page">
-        <div class="navbar">
-            <div id="sa_head_pack_up">
-                <a id="sidebar-pack" class="btn-icon">
-                    <span class="icon-pack-up"></span>
+    <div class="q-page">
+        <aside class="q-sidebar">
+            <div class="q-sidebar-top">
+                <a class="q-logo"></a>
+            </div>
+            <div class="q-sidebar-main">
+                <div class="q-scoll-wrap">
+                    <Menu></Menu>
+                </div>
+            </div>
+            <div class="q-sidebar-bottom">
+                <MenuBtm></MenuBtm>
+            </div>
+        </aside>
+        <div class="q-navbar">
+            <div class="q-sidebar-pack">
+                <a class="btn-icon">
+                    <span class="glyphicon glyphicon-search"></span>
                 </a>
             </div>
             <div id="sa_head_project" class="single-project">
@@ -50,27 +63,20 @@
                 </li>
             </ul>
         </div>
-        <aside class="sidebar">
-            <div id="sidebar-top" class="sidebar-top">
-                <a class="q-logo"></a>
-            </div>
-            <div class="sa-sidebar-scoll-wrap">
-                <Menu></Menu>
-            </div>
-            <div class="sidebar-bottom">
-                <MenuBtm></MenuBtm>
-            </div>
-        </aside>
         <div class="main">
             <slot name="toolbar"></slot>
             <div class="sa-report">
                 <slot name="report"></slot>
             </div>
         </div>
+        <div class="copyright">
+
+        </div>
     </div>
 </template>
 
 <script>
+import './../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import Menu from './Menu';
 import MenuBtm from './MenuBtm';
 
@@ -89,87 +95,28 @@ export default {
 </script>
 
 <style lang="scss">
-@import './normalize.css';
-
-* {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-}
-.dropdown {
-    position: relative;
-    &.open {
-        .dropdown-menu {
-            display: block;
-        }
-    }
-
-    .dropdown-menu {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        z-index: 1000;
-        display: none;
-        float: left;
-        min-width: 160px;
-        padding: 5px 0;
-        margin: 2px 0 0;
-        font-size: 14px;
-        text-align: left;
-        list-style: none;
-        background-color: #fff;
-        background-clip: padding-box;
-        border: 1px solid #ccc;
-        border: 1px solid rgba(0, 0, 0, 0.15);
-        border-radius: 4px;
-        -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
-        -webkit-background-clip: padding-box;
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
-    }
-
-    .dropdown-menu {
-        min-width: 100%;
-        border-radius: 0;
-        padding: 0;
-        max-width: 320px;
-        z-index: 1070;
-
-        li {
-            position: relative;
-            a {
-                display: block;
-                padding: 3px 20px;
-                padding: 6px;
-                width: 100%;
-                height: 100%;
-                font-weight: 400;
-                line-height: 1.42;
-                color: #4c535a;
-                white-space: nowrap;
-                overflow: hidden;
-                clear: both;
-                text-overflow: ellipsis;
-                cursor: pointer;
-                transition: background 0.2s ease-in-out;
-            }
-        }
-    }
-}
-
 @function stripUnit($number) {
     @return $number / ($number * 0 +1);
 }
 
 $navbarHeight: 55;
 $sidebarWidth: 240;
+$sidebarWidthPx: $sidebarWidth * 1px;
 
-.navbar {
+.q-page {
+    width: 100%;
+    height: 100vh;
+    padding-top: $navbarHeight * 1px;
+    align-items: stretch;
+    min-width: 799px;
+}
+
+.q-navbar {
     position: fixed;
     right: 0px;
     top: 0px;
     z-index: 1030;
-    margin-bottom: 20px;
-    width: calc(100% - 240px);
+    width: calc(100% - 240px);// 有问题
     height: $navbarHeight * 1px;
     min-height: 50px;
     line-height: $navbarHeight * 1px;
@@ -185,7 +132,7 @@ $sidebarWidth: 240;
         transition: all 0.2s ease;
     }
 
-    #sa_head_pack_up {
+    .q-sidebar-pack {
         position: relative;
         margin-left: -4px;
         display: inline-block;
@@ -193,7 +140,7 @@ $sidebarWidth: 240;
         vertical-align: top;
 
         a {
-            display: inline-block;
+            display: block;
             width: 100%;
             height: 55px;
             color: #475669;
@@ -244,57 +191,47 @@ $sidebarWidth: 240;
     }
 }
 
-.page {
-    width: 100%;
-    height: 100vh;
-    padding-top: $navbarHeight * 1px;
-    align-items: stretch;
-    min-width: 799px;
-}
-
-.sidebar {
+.q-sidebar {
     position: fixed;
     top: 0;
     left: 0;
     z-index: 1020;
-    padding: 0 0 50px;
     width: $sidebarWidth * 1px;
     height: 100%;
     background: #35404f;
     transition: width 0.2s, left 0.2s;
     box-shadow: 2px 0 10px 0 rgba(166, 166, 166, 0.5);
 
-    .q-logo {
-        width: 130px;
-        height: $navbarHeight * 1px;
-        background: 10px center no-repeat;
-        background-size: 110px auto;
-        display: inline-block;
-        transform: scale(0.85);
-        transition: transform 0.3s;
+    .q-sidebar-top {
+        .q-logo {
+            display: block;
+            width: 130px;
+            height: $navbarHeight * 1px;
+            background: 10px center no-repeat;
+            background-size: 110px auto;
+            display: inline-block;
+            transform: scale(0.85);
+            transition: transform 0.3s;
+        }
     }
 
-    .sidebar-top .q-logo {
-        display: block;
-    }
-
-    .sa-sidebar-scoll-wrap {
+    .q-sidebar-main {
         height: calc(100% - 60px);
         overflow-y: auto;
     }
 
-    .sidebar-bottom {
+    .q-sidebar-bottom {
         position: absolute;
         left: 0;
         bottom: 0;
-        width: 240px;
-        height: 50px;
         display: flex;
+        width: 100%;
+        height: 50px;
         background: #35404f;
-        transition: all 0.15s linear;
-        border-left: 1px solid #35404f;
         overflow-x: hidden;
+        border-left: 1px solid #35404f;
         border-top: 1px solid #2e3743;
+        transition: all 0.15s linear;
     }
 }
 
