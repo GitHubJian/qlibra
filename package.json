@@ -3,10 +3,12 @@
     "version": "1.0.2",
     "description": "",
     "main": "index.js",
+    "bin": "./bin/index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "start": " NODE_ENV=development node index.js",
         "debug": "node --inspect-brk index.js",
+        "pm2": "pm2 start ./index.js --watch && pm2 logs index",
         "webpack": "node ./webpack",
         "webpack-cli": "node_modules/.bin/webpack --config ./webpack/webpack.config.js"
     },
@@ -16,6 +18,7 @@
     "dependencies": {
         "@babel/core": "^7.0.0",
         "@babel/preset-env": "^7.0.0",
+        "axios": "^0.18.0",
         "babel-core": "^6.26.3",
         "babel-loader": "^8.0.0",
         "babel-plugin-syntax-jsx": "^6.18.0",

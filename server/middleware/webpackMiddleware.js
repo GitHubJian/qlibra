@@ -11,6 +11,7 @@ const webpackConfig = require(path.resolve(
 ));
 
 const { deepClone } = require('./../utils');
+const logger = require('./../utils/logger');
 
 const projectEntry = deepClone(webpackConfig.entry);
 

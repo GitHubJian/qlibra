@@ -201,9 +201,6 @@ export default {
                             cursor: pointer;
                             user-select: none;
                         }
-
-                        .icon-collaps-up {
-                        }
                     }
 
                     .groups-menus {
