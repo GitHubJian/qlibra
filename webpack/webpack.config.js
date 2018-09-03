@@ -3,14 +3,9 @@ const glob = require('glob');
 const { statSync } = require('fs');
 const pathConfig = require('./../path.config');
 const { entry } = require('./entry');
+const { rules, extractCSS } = require('./rules');
 
 const webpack = require('webpack');
-
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const extractCSS = new ExtractTextPlugin({
-    filename: 'css/[name].css',
-    allChunks: true
-});
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
@@ -22,6 +17,10 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const { entry: dllEntry } = require('./webpack.dll.config');
 
 const { NODE_ENV } = process.env;
+const [isDevelopment, isProduction] = [
+    NODE_ENV == 'development',
+    NODE_ENV == 'production'
+];
 
 const HtmlWebpackPluginList = Object.entries(entry).map(([k, v]) => {
     return new HtmlWebpackPlugin({
@@ -57,61 +56,7 @@ const webpackConfig = {
         extensions: ['.js', '.json', '.vue']
     },
     module: {
-        rules: [
-            {
-                test: /\.vue$/,
-                loader: 'vue-loader',
-                options: {
-                    loaders: {
-                        css: extractCSS.extract({
-                            fallback: 'vue-style-loader',
-                            use: ['css-loader']
-                        }),
-                        sass: extractCSS.extract({
-                            fallback: 'vue-style-loader',
-                            use: ['sass-loader', 'css-loader']
-                        }),
-                        js: {
-                            loader: 'babel-loader',
-                            options: {
-                                presets: ['@babel/preset-env']
-                            }
-                        }
-                    }
-                }
-            },
-            {
-                test: /\.css$/,
-                use: extractCSS.extract({
-                    fallback: 'style-loader',
-                    use: [
-                        {
-                            loader: 'css-loader',
-                            options: {}
-                        }
-                    ]
-                })
-            },
-            {
-                test: /\.scss$/,
-                use: extractCSS.extract({
-                    fallback: 'style-loader',
-                    use: ['css-loader', 'sass-loader']
-                })
-            },
-            {
-                test: /\.js$/,
-                exclude: /(node_modules)/,
-                use: [
-                    {
-                        loader: 'babel-loader',
-                        options: {
-                            presets: ['@babel/preset-env']
-                        }
-                    }
-                ]
-            }
-        ]
+        rules
     },
     plugins: [
         new VueLoaderPlugin(),
@@ -156,43 +101,52 @@ const webpackConfig = {
     ]
 };
 
-// if (isDevelopment) {
-//     webpackConfig.plugins.push(
-//         ...[
-//             new webpack.HotModuleReplacementPlugin(),
-//             new webpack.NoEmitOnErrorPlugin(),
-//             new webpack.NamedModulePlugin(),
-//             new HtmlWebpackIncludeAssetsPlugin()
-//         ]
-//     );
-// } else {
-// }
+if (isDevelopment) {
+    webpackConfig.plugins.push(
+        ...[
+            new webpack.HotModuleReplacementPlugin(),
+            new webpack.NamedModulesPlugin()
+        ]
+    );
+} else {
+    webpackConfig.plugins.push(
+        ...[
+            extractCSS,
+            new CleanWebpackPlugin([resolve(pathConfig.dist, 'js')], {
+                root: pathConfig.root,
+                verbose: false
+            }),
+            new AssetsWebpackPlugin({
+                path: resolve(pathConfig.dist, 'js'),
+                filename: 'index.json',
+                prettyPrint: true
+            }),
+            ...HtmlWebpackPluginList,
+            new HtmlWebpackIncludeAssetsPlugin({
+                append: false,
+                assets: Object.entries(require(`${pathConfig.dll}/index.json`))
+                    .map(([k, v]) => {
+                        return Object.values(v);
+                    })
+                    .reduce((prev, cur) => {
+                        prev.push(...cur.map(v => v.slice(1)));
+                        return prev;
+                    }, [])
+            })
+        ]
+    );
+}
 
-webpackConfig.plugins.push(
-    ...[
-        extractCSS,
-        new CleanWebpackPlugin([resolve(pathConfig.dist, 'js')], {
-            root: pathConfig.root,
-            verbose: false
-        }),
-        new AssetsWebpackPlugin({
-            path: resolve(pathConfig.dist, 'js'),
-            filename: 'index.json',
-            prettyPrint: true
-        }),
-        ...HtmlWebpackPluginList,
-        new HtmlWebpackIncludeAssetsPlugin({
-            append: false,
-            assets: Object.entries(require(`${pathConfig.dll}/index.json`))
-                .map(([k, v]) => {
-                    return Object.values(v);
-                })
-                .reduce((prev, cur) => {
-                    prev.push(...cur);
-                    return prev;
-                }, [])
+if (isProduction) {
+    webpackConfig.plugins.push(
+        new ParallelUglifyPlugin({
+            uglifyJS: {
+                compress: {
+                    warnings: false
+                }
+            }
         })
-    ]
-);
+    );
+}
 
 module.exports = { webpackConfig };

@@ -1,5 +1,7 @@
 const rootPath = process.cwd();
+const fs = require('fs');
 const path = require('path');
+const pathConfig = require('./../../path.config');
 const webpack = require('webpack');
 const singleEntryPlugin = require('webpack/lib/SingleEntryPlugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -10,28 +12,46 @@ const { webpackConfig } = require(path.resolve(
     'webpack/webpack.config.js'
 ));
 
+const { NODE_ENV } = process.env;
+
 const { deepClone } = require('./../utils');
-const logger = require('./../utils/logger');
+
 const projectEntry = deepClone(webpackConfig.entry);
 
 webpackConfig.entry = {
     global: [
-        'webpack-hot-middleware/client',
+        'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=10000&reload=true',
         path.resolve(rootPath, 'src/global.js')
     ]
 };
 
-const getSingleHtmlPlugin = function(entryKey, entryValue) {
-    const options = new HtmlWebpackPlugin({
-        filename: `${entryKey}.html`,
-        title: '测试',
-        template: path.resolve(rootPath, 'template/index.html'),
-        favicon: path.resolve(rootPath, 'dist/favicon.ico'),
-        chunks: ['global', entryValue],
-        scripts: ['global.js', `${entryKey}.js`],
-        inject: 'body'
+const utimeFn = strPath => {
+    const now = Date.now() / 1000;
+    const then = now - 10;
+    fs.utimes(strPath, then, then, err => {
+        if (err) {
+            throw err;
+        }
     });
-    return options;
+};
+const setFileUtime = entryPath => {
+    if (Array.isArray(entryPath)) {
+        entryPath.forEach(utimeFn);
+    } else {
+        utimeFn(entryPath);
+    }
+};
+
+const getSingleHtmlPlugin = function(k, v) {
+    setFileUtime(v);
+    return new HtmlWebpackPlugin({
+        filename: `${k}.html`,
+        title: '测试',
+        template: pathConfig.template,
+        favicon: pathConfig.favicon,
+        chunks: ['global', k],
+        NODE_ENV
+    });
 };
 
 module.exports = app => {

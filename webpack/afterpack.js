@@ -28,16 +28,15 @@ const { writeFileSync } = require('fs');
 const { entry } = require('./entry');
 
 const afterpack = async () => {
-    Object.entries(entry).forEach(async ([k, v]) => {
-        const content = temp.replace('#script#', k);
-        const filePath = path.resolve(pathConfig.dist, `${k}.html`);
-        await fs.ensureFileSync(filePath);
-        await writeFileSync(filePath, content);
+    // Object.entries(entry).forEach(async ([k, v]) => {
+    //     const content = temp.replace('#script#', k);
+    //     const filePath = path.resolve(pathConfig.dist, `${k}.html`);
+    //     await fs.ensureFileSync(filePath);
+    //     await writeFileSync(filePath, content);
+    // });
+    Object.entries(entry).forEach(([k, v]) => {
+        console.log(`http://localhost:8416/${k}.html`);
     });
 };
-
-Object.entries(entry).forEach(([k, v]) => {
-    console.log(`http://localhost:8416/${k}.html`);
-});
 
 module.exports = afterpack;

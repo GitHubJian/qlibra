@@ -6,7 +6,7 @@ const { webpackConfig } = require('./webpack.config');
 const build = async () => {
     prepack();
     await webpackCompiler(webpackConfig);
-    //afterpack();
+    afterpack();
 };
 
 build();

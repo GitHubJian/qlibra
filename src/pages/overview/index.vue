@@ -47,7 +47,9 @@ export default {
         OverviewPanel
     },
     data() {
-        return {};
+        return {
+            abc: 1
+        };
     }
 };
 </script>

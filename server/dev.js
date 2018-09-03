@@ -3,7 +3,7 @@
 const koa = require('koa');
 const koaBody = require('koa-body');
 const logger = require('./utils/logger');
-const { assetProxyMiddleware } = require('./middleware');
+const { assetProxyMiddleware, webpackMiddleware } = require('./middleware');
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
