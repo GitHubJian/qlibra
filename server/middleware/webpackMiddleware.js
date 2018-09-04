@@ -7,6 +7,7 @@ const singleEntryPlugin = require('webpack/lib/SingleEntryPlugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { hotMiddleware } = require('koa-webpack-middleware');
 const webpackDevMiddleware = require('webpack-dev-middleware');
+const logger = require('./../utils/logger');
 const { webpackConfig } = require(path.resolve(
     rootPath,
     'webpack/webpack.config.js'
@@ -21,7 +22,7 @@ const projectEntry = deepClone(webpackConfig.entry);
 webpackConfig.entry = {
     global: [
         'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=10000&reload=true',
-        path.resolve(rootPath, 'src/global.js')
+        pathConfig.global
     ]
 };
 
@@ -34,6 +35,7 @@ const utimeFn = strPath => {
         }
     });
 };
+
 const setFileUtime = entryPath => {
     if (Array.isArray(entryPath)) {
         entryPath.forEach(utimeFn);
@@ -45,7 +47,7 @@ const setFileUtime = entryPath => {
 const getSingleHtmlPlugin = function(k, v) {
     setFileUtime(v);
     return new HtmlWebpackPlugin({
-        filename: `${k}.html`,
+        filename: path.resolve(pathConfig.static, `${k}.html`),
         title: '测试',
         template: pathConfig.template,
         favicon: pathConfig.favicon,
@@ -67,6 +69,7 @@ module.exports = app => {
                 ctx.path === '/'
                     ? 'index'
                     : path.join(ctx.path.replace('.html', '').substring(1));
+
             const entryValue = projectEntry[entryKey];
 
             if (entryValue) {

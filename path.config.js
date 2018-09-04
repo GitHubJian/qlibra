@@ -5,12 +5,13 @@ const entry = {
     temp: '.temp',
     prepackPath: '.temp/prepack',
     dist: 'dist',
-    dll: 'dist/dll',
+    dll: 'dll',
     src: 'src',
     static: 'static',
     nodeModule: 'node_modules',
     favicon: 'favicon.ico',
-    template: 'webpack/template.ejs'
+    template: 'webpack/template.ejs',
+    global: 'src/global.js'
 };
 
 const paths = Object.entries(entry).reduce((prev, [k, v]) => {

@@ -1,6 +1,7 @@
 const { basename, resolve } = require('path');
 const glob = require('glob');
-const { statSync } = require('fs');
+const { statSync, existsSync } = require('fs');
+const fs = require('fs-extra');
 const pathConfig = require('./../path.config');
 const { entry } = require('./entry');
 const { rules, extractCSS } = require('./rules');
@@ -28,7 +29,7 @@ const HtmlWebpackPluginList = Object.entries(entry).map(([k, v]) => {
         template: resolve(__dirname, './template.ejs'),
         title: '测试',
         favicon: pathConfig.favicon,
-        chunks: ['vendor', k],
+        chunks: ['manifest', 'global', k],
         NODE_ENV
     });
 });
@@ -45,10 +46,10 @@ const alias = glob
 
 const webpackConfig = {
     mode: 'production',
-    entry: entry,
+    entry: Object.assign({ global: pathConfig.global }, entry),
     output: {
         filename: 'js/[name].js',
-        path: pathConfig.dist,
+        path: pathConfig.static,
         publicPath: '/'
     },
     resolve: {
@@ -72,34 +73,35 @@ const webpackConfig = {
         new webpack.NoEmitOnErrorsPlugin(),
         new CopyWebpackPlugin([
             {
-                from: resolve(pathConfig.dist, 'js'),
-                to: resolve(pathConfig.static, 'js')
-            },
-            {
-                from: resolve(pathConfig.dist, 'css'),
-                to: resolve(pathConfig.static, 'css')
+                from: resolve(pathConfig.dll, 'css'),
+                to: resolve(pathConfig.static, 'dll/css')
             },
             {
                 from: resolve(pathConfig.dll, 'js'),
-                to: resolve(pathConfig.static, 'js')
-            },
-            {
-                from: resolve(pathConfig.dll, 'css'),
-                to: resolve(pathConfig.static, 'css')
+                to: resolve(pathConfig.static, 'dll/js')
             },
             {
                 from: pathConfig.favicon,
                 to: pathConfig.static
             }
-        ]),
-        ...Object.keys(dllEntry).map(
-            v =>
+        ])
+    ]
+};
+
+//动态引入dll
+webpackConfig.plugins.push(
+    ...Object.keys(dllEntry).reduce((prev, v) => {
+        if (existsSync(`${pathConfig.dll}/${v}.json`)) {
+            prev.push(
                 new webpack.DllReferencePlugin({
                     manifest: require(`${pathConfig.dll}/${v}.json`)
                 })
-        )
-    ]
-};
+            );
+        }
+
+        return prev;
+    }, [])
+);
 
 if (isDevelopment) {
     webpackConfig.plugins.push(
@@ -121,7 +123,11 @@ if (isDevelopment) {
                 filename: 'index.json',
                 prettyPrint: true
             }),
-            ...HtmlWebpackPluginList,
+            ...HtmlWebpackPluginList
+        ]
+    );
+    if (existsSync(`${pathConfig.dll}/index.json`)) {
+        webpackConfig.plugins.push(
             new HtmlWebpackIncludeAssetsPlugin({
                 append: false,
                 assets: Object.entries(require(`${pathConfig.dll}/index.json`))
@@ -133,8 +139,9 @@ if (isDevelopment) {
                         return prev;
                     }, [])
             })
-        ]
-    );
+        );
+    }
+    webpackConfig.plugins.push();
 }
 
 if (isProduction) {

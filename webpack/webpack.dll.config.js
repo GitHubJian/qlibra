@@ -8,7 +8,7 @@ const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin');
 
 const LIBRARY_NAME = '__[name]_[chunkhash]';
 
-const entry = { vendor: ['vue', 'bootstrap/dist/css/bootstrap.min.css'] };
+const entry = {};
 
 const webpackConfig = {
     entry,
