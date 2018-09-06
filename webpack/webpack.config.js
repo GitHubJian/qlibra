@@ -4,7 +4,7 @@ const { statSync, existsSync } = require('fs');
 const fs = require('fs-extra');
 const pathConfig = require('./../path.config');
 const { entry } = require('./entry');
-const { rules, extractCSS } = require('./rules');
+const { rules, extractCSS, plugins: rulesPlugins } = require('./rules');
 
 const webpack = require('webpack');
 
@@ -64,6 +64,7 @@ const webpackConfig = {
         rules
     },
     plugins: [
+        ...rulesPlugins,
         new VueLoaderPlugin(),
         new webpack.ProgressPlugin(),
         new webpack.EnvironmentPlugin(['NODE_ENV']),
@@ -89,7 +90,17 @@ const webpackConfig = {
                 to: pathConfig.static
             }
         ])
-    ]
+    ],
+    performance: {
+        hints: false
+    },
+    stats: {
+        colors: true,
+        modules: false,
+        children: false,
+        chunks: false
+    },
+    devtool: isDevelopment ? 'eval-source-map' : ''
 };
 
 //动态引入dll

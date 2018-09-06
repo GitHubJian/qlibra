@@ -10,29 +10,9 @@ const extractCSS = new ExtractTextPlugin({
     allChunks: true
 });
 
+const { createHappypackPlugin } = require('./happypack');
+
 const rules4Prod = [
-    {
-        test: /\.vue$/,
-        loader: 'vue-loader',
-        options: {
-            loaders: {
-                css: extractCSS.extract({
-                    fallback: 'vue-style-loader',
-                    use: ['css-loader']
-                }),
-                sass: extractCSS.extract({
-                    fallback: 'vue-style-loader',
-                    use: ['sass-loader', 'css-loader']
-                }),
-                js: {
-                    loader: 'babel-loader',
-                    options: {
-                        presets: ['@babel/preset-env']
-                    }
-                }
-            }
-        }
-    },
     {
         test: /\.css$/,
         use: extractCSS.extract({
@@ -63,13 +43,55 @@ const rules4Prod = [
                 }
             }
         ]
+    },
+    {
+        test: /\.(png|jpe?g|gif|svg|woff2?|eot|ttf|otf)(\?.*)?$/,
+        use: [
+            {
+                loader: 'url-loader',
+                options: {
+                    limit: 10000,
+                    name: 'image/[name].[hash].[ext]'
+                }
+            }
+        ]
+    },
+    {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+        options: {
+            loaders: {
+                css: extractCSS.extract({
+                    fallback: 'vue-style-loader',
+                    use: ['css-loader']
+                }),
+                sass: extractCSS.extract({
+                    fallback: 'vue-style-loader',
+                    use: ['sass-loader', 'css-loader']
+                }),
+                js: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['@babel/preset-env']
+                    }
+                }
+            }
+        }
     }
 ];
 
 const rules4Dev = [
     {
-        test: /\.vue$/,
-        use: 'vue-loader'
+        test: /\.css$/,
+        use: ['vue-style-loader', 'css-loader']
+    },
+    {
+        test: /\.scss$/,
+        use: ['vue-style-loader', 'css-loader', 'sass-loader']
+    },
+    {
+        test: /\.sass$/,
+        use: ['vue-style-loader', 'css-loader', 'sass-loader']
     },
     {
         test: /\.js$/,
@@ -84,14 +106,6 @@ const rules4Dev = [
         ]
     },
     {
-        test: /\.css$/,
-        use: ['vue-style-loader', 'css-loader']
-    },
-    {
-        test: /\.scss$/,
-        use: ['vue-style-loader', 'css-loader', 'sass-loader']
-    },
-    {
         test: /\.(png|jpe?g|gif|svg|woff2?|eot|ttf|otf)(\?.*)?$/,
         use: [
             {
@@ -102,7 +116,58 @@ const rules4Dev = [
                 }
             }
         ]
+    },
+    {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+        options: {
+            loaders: {
+                css: ['vue-style-loader', 'style-loader', 'css-loader'],
+                scss: [
+                    'vue-style-loader',
+                    'style-loader',
+                    'css-loader',
+                    'sass-loader'
+                ],
+                js: {
+                    loaders: 'balel-loader',
+                    options: {
+                        presets: ['@babel/preset-env']
+                    }
+                }
+            }
+        }
     }
 ];
 
-module.exports = { extractCSS, rules: isDevelopment ? rules4Dev : rules4Prod };
+const plugins = [
+    createHappypackPlugin('css', [
+        { path: 'style-loader' },
+        { path: 'css-loader' }
+    ]),
+    createHappypackPlugin('scss', [
+        { path: 'style-loader' },
+        { path: 'css-loader' },
+        { path: 'sass-loader' }
+    ]),
+    createHappypackPlugin('sass', [
+        { path: 'style-loader' },
+        { path: 'css-loader' },
+        { path: 'sass-loader' }
+    ]),
+    createHappypackPlugin('js', [
+        {
+            loader: 'babel-loader',
+            options: {
+                presets: ['@babel/preset-env']
+            }
+        }
+    ]),
+    createHappypackPlugin('vue', ['vue-loader'])
+];
+
+module.exports = {
+    extractCSS,
+    rules: isDevelopment ? rules4Dev : rules4Prod,
+    plugins
+};
