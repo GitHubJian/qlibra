@@ -15,8 +15,8 @@ const temp = [
     '})'
 ];
 
-const prepack = async () =>
-    glob
+const prepack = async () => {
+    return glob
         .sync(path.resolve(src, './pages/**/index.vue'))
         .forEach(async entry => {
             let key = entry.split('/').slice(-2, -1)[0];
@@ -26,5 +26,6 @@ const prepack = async () =>
             await fs.ensureFileSync(filePath);
             await writeFileSync(filePath, content);
         });
+};
 
 module.exports = prepack;

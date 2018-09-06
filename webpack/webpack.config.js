@@ -23,6 +23,10 @@ const [isDevelopment, isProduction] = [
     NODE_ENV == 'production'
 ];
 
+//解决复制dll报错的问题
+fs.ensureDirSync(resolve(pathConfig.dll, 'css'));
+fs.ensureDirSync(resolve(pathConfig.dll, 'js'));
+
 const HtmlWebpackPluginList = Object.entries(entry).map(([k, v]) => {
     return new HtmlWebpackPlugin({
         filename: resolve(pathConfig.static, `${k}.html`),

@@ -6,7 +6,7 @@
     "bin": "./bin/index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "start": " NODE_ENV=development node index.js",
+        "start": " NODE_ENV=development PORT=8418 node index.js",
         "debug": "node --inspect-brk index.js",
         "pm2": "pm2 start ./index.js --watch && pm2 logs index",
         "build": "NODE_ENV=production node ./webpack/build",
