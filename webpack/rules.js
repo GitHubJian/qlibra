@@ -1,3 +1,7 @@
+/**
+ * 处理单独的CSS样式
+ */
+
 const { NODE_ENV } = process.env;
 const [isDevelopment, isProduction] = [
     NODE_ENV == 'development',
@@ -11,28 +15,6 @@ const extractCSS = new ExtractTextPlugin({
 });
 
 const rules4Prod = [
-    {
-        test: /\.vue$/,
-        loader: 'vue-loader',
-        options: {
-            loaders: {
-                css: extractCSS.extract({
-                    fallback: 'vue-style-loader',
-                    use: ['css-loader']
-                }),
-                sass: extractCSS.extract({
-                    fallback: 'vue-style-loader',
-                    use: ['sass-loader', 'css-loader']
-                }),
-                js: {
-                    loader: 'babel-loader',
-                    options: {
-                        presets: ['@babel/preset-env']
-                    }
-                }
-            }
-        }
-    },
     {
         test: /\.css$/,
         use: extractCSS.extract({
@@ -51,45 +33,34 @@ const rules4Prod = [
             fallback: 'style-loader',
             use: ['css-loader', 'sass-loader']
         })
-    },
-    {
-        test: /\.js$/,
-        exclude: /(node_modules)/,
-        use: [
-            {
-                loader: 'babel-loader',
-                options: {
-                    presets: ['@babel/preset-env']
-                }
-            }
-        ]
     }
 ];
 
 const rules4Dev = [
     {
-        test: /\.vue$/,
-        use: 'vue-loader'
-    },
-    {
-        test: /\.js$/,
-        exclude: /(node_modules)/,
-        use: [
-            {
-                loader: 'babel-loader',
-                options: {
-                    presets: ['@babel/preset-env']
-                }
-            }
-        ]
-    },
-    {
         test: /\.css$/,
-        use: ['vue-style-loader', 'css-loader']
+        use: ['happypack/loader?id=css']
+    },
+    {
+        test: /\.sass$/,
+        use: ['happypack/loader/id=scss']
     },
     {
         test: /\.scss$/,
-        use: ['vue-style-loader', 'css-loader', 'sass-loader']
+        use: ['happypack/loader/id=scss']
+    }
+];
+
+const global = [
+    {
+        test: /\.vue$/,
+        use: ['happypack/loader?id=vue', 'vue-loader'],
+        exclude: ['/node_modules/']
+    },
+    {},
+    {
+        test: /\.js$/,
+        use: 'happypack/loader?id=js'
     },
     {
         test: /\.(png|jpe?g|gif|svg|woff2?|eot|ttf|otf)(\?.*)?$/,
@@ -105,4 +76,7 @@ const rules4Dev = [
     }
 ];
 
-module.exports = { extractCSS, rules: isDevelopment ? rules4Dev : rules4Prod };
+module.exports = {
+    extractCSS,
+    rules: isDevelopment ? rules4Dev.concat(global) : rules4Prod.concat(global)
+};

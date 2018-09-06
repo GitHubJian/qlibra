@@ -6,7 +6,7 @@
         <template slot="report">
             <div class="filter-tool-bar">
                 <div class="event-bar">
-                    <span>请添加指标</span>
+                    <span>请添加指标111</span>
                 </div>
                 <section class="report-ops">
                     <div class="report-ops-panel">
@@ -30,7 +30,7 @@
                 </section>
             </div>
             <div class="report-filter-wrapper">
-                <h4>针对表格进行删选</h4>
+                <h4>针对表格进行删选1111</h4>
             </div>
             <div id="report" class="report-chart" style="width:100%;height:400px;padding:12px;"></div>
         </template>

@@ -1,3 +1,3 @@
 const config = require('./config');
 
-require('./server')(config);
+require('./server')(config.projectConfig);

@@ -1,3 +1,7 @@
+const pathConfig = require('./path.config');
+const projectConfig = require('./project.config');
+
 module.exports = {
-    port: +process.env.PORT || 8416
+    pathConfig,
+    projectConfig
 };
